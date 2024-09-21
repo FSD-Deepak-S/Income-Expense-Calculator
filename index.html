@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Income expense Calculator</title>
+    <link
+      rel="shortcut icon"
+      href="https://thumbs.dreamstime.com/b/budget-calculator-allows-you-to-input-your-income-expenses-month-helps-you-determine-your-savings-potential-322807534.jpg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            Rt: ["Righteous,sans-serif"],
+            Rd: ["Rowdies,sans-serif"],
+            Sr: ["Saira,sans-serif"],
+            In: ["Inter,sans-serif"],
+          },
+          extend: {
+            colors: {
+              "regal-blue": "#243c5a",
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Righteous&family=Rowdies:wght@300;400;700&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-black">
+    <div id="dashboard" class="m-10 bg-white">
+      <!-- header section to display total income , expense and Balance -->
+
+      <header class="font-Rt space-y-2">
+        <h1 class="text-center text-xl font-Rd text-white py-4 bg-gradient-to-tr from-blue-700 via-violet-800 to-fuchsia-900">
+          Income Expense Calculator
+        </h1>
+
+        <div
+          class="grid space-y-4 sm:space-y-0 sm:grid-flow-col text-center mx-4 sm:space-x-10"
+        >
+          <div
+            class="py-2 space-y-1 hadow-md bg-gradient-to-r from-emerald-500 to-emerald-900 rounded-md"
+          >
+            <h1 class="text-white">Income</h1>
+            <h5 id="tincome" class="text-white"></h5>
+          </div>
+          <div
+            class="py-2 space-y-1 shadow-md bg-gradient-to-r from-fuchsia-600 to-pink-600 border-black rounded-md"
+          >
+            <h1 class="text-white"">Expense</h1>
+            <h5 id="texpense" class="text-white"></h5>
+          </div>
+          <div
+            class="py-2 space-y-1 shadow-md bg-gradient-to-r from-blue-800 to-indigo-900 border-black rounded-md"
+          >
+            <h1 class="text-white">Balance</h1>
+            <h5 id="tbalance" class="text-white"></h5>
+          </div>
+        </div>
+      </header>
+
+      <!-- Add income and expense Button to open form  -->
+
+      <section class="mt-10">
+        <div class="flex space-x-5 justify-center">
+          <button
+            type="button"
+            class="font-In font-bold bg-green-500 rounded-md p-2 shadow-lg shadow-green-500"
+            id="add_income"
+            value="Income"
+            onclick="IEform(this)"
+          >
+            Add Income
+          </button>
+          <button
+            type="button"
+            class="font-In font-bold bg-red-500 rounded-md p-2 shadow-lg shadow-red-500"
+            id="add_expense"
+            value="Expense"
+            onclick="IEform(this)"
+          >
+            Add Expense
+          </button>
+        </div>
+      </section>
+
+      <!-- transacation Details  -->
+
+      <section class="mt-10 font-Sr border py-4  text-white font-medium bg-gradient-to-tr from-blue-700 via-violet-800 to-fuchsia-900" >
+        <!-- <div class="transaction space-y-2"> -->
+        <h1 class="text-center font-bold">Transaction Details</h1>
+        <!-- Filter section  -->
+        <div class="flex justify-center space-x-2 p-5">
+          <label for="all" class="radio cursor-pointer">
+            <input
+              type="radio"
+              name="transaction"
+              id="all"
+              class="peer hidden"
+              checked=""
+              value="all"
+              onclick="filterTrans(this)"
+            />
+            <span
+              class="peer-checked:bg-white peer-checked:text-blue-950 peer-checked:font-bold p-2 rounded-sm"
+              >All</span
+            >
+          </label>
+          <label for="income" class="radio cursor-pointer">
+            <input
+              type="radio"
+              name="transaction"
+              id="income"
+              class="peer hidden"
+              value="Income"
+              onclick="filterTrans(this)"
+            />
+            <span
+              class="peer-checked:bg-white peer-checked:text-blue-950 peer-checked:font-bold p-2 rounded-sm"
+              >Income</span
+            >
+          </label>
+          <label for="expense" class="radio cursor-pointer">
+            <input
+              type="radio"
+              name="transaction"
+              id="expense"
+              class="peer hidden"
+              value="Expense"
+              onclick="filterTrans(this)"
+            />
+            <span
+              class="peer-checked:bg-white peer-checked:text-blue-950 peer-checked:font-bold p-2 rounded-sm"
+              >Expense</span
+            >
+          </label>
+        </div>
+        <!-- transaction details report table  -->
+         <div class="h-56 overflow-y-scroll">
+          <table class="border-collapse  border w-full font-In text-center table-auto overflow-x-scroll	">
+            <thead class="bg-white text-blue-950">
+              <tr class="h-10">
+                <th class="w-1/4">Type</th>
+                <th class="w-1/4">Description</th>
+                <th class="w-1/4">Amount</th>
+                <th class="w-1/4">Action</th>
+              </tr>
+            </thead>
+            <tbody class="font-Sr text-sm" id="transaction"></tbody>
+          </table>
+         </div>
+        
+      </section>
+
+    </div>
+
+    <form
+      class="hidden p-5 relative h-fit space-y-3 border mx-10 mt-10 sm:mx-56 bg-[#2E26D9]"
+      id="form"
+    >
+      <h1 class="text-center font-Rt text-white" id="form-title"></h1>
+      <input type="hidden" name="type" id="type" />
+      <input type="text name="desc" id="description" placeholder="Enter
+      Description" class="rounded-md p-2 border" />
+
+      <input
+        type="number"
+        name="amount"
+        id="amount"
+        placeholder="Enter Amount"
+        class="rounded-md p-2 border"
+      />
+      <span class="font-bold" id="descError"> </span>
+      <div class="grid grid-flow-col space-x-2">
+        <button
+          type="submit"
+          class="rounded-md p-2 bg-[#FFC4DD] text-[#2E26D9] font-bold"
+          id="submit"
+        >
+          Submit
+        </button>
+        <button
+          type="submit"
+          class="rounded-md p-2 bg-[#FFC4DD] text-[#2E26D9] font-bold"
+          id="close"
+        >
+          Close
+        </button>
+      </div>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>
