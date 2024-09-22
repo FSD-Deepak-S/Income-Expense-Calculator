@@ -9,8 +9,6 @@
       href="https://thumbs.dreamstime.com/b/budget-calculator-allows-you-to-input-your-income-expenses-month-helps-you-determine-your-savings-potential-322807534.jpg"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="style.css" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -73,7 +71,7 @@
         <div class="flex space-x-5 justify-center">
           <button
             type="button"
-            class="font-In font-bold bg-green-500 rounded-md p-2 shadow-lg shadow-green-500"
+            class="font-In font-bold bg-green-700 rounded-md p-2 shadow-lg text-white"
             id="add_income"
             value="Income"
             onclick="IEform(this)"
@@ -82,7 +80,7 @@
           </button>
           <button
             type="button"
-            class="font-In font-bold bg-red-500 rounded-md p-2 shadow-lg shadow-red-500"
+            class="font-In font-bold bg-red-700 rounded-md p-2 shadow-lg text-white"
             id="add_expense"
             value="Expense"
             onclick="IEform(this)"
@@ -179,17 +177,17 @@
         class="rounded-md p-2 border"
       />
       <span class="font-bold" id="descError"> </span>
-      <div class="grid grid-flow-col space-x-2">
+      <div class="flex justify-end space-x-2">
         <button
           type="submit"
-          class="rounded-md p-2 bg-[#FFC4DD] text-[#2E26D9] font-bold"
+          class="rounded-md p-2 bg-green-600 text-white font-bold"
           id="submit"
         >
-          Submit
+          Add
         </button>
         <button
           type="submit"
-          class="rounded-md p-2 bg-[#FFC4DD] text-[#2E26D9] font-bold"
+          class="rounded-md p-2 bg-red-600 text-white font-bold"
           id="close"
         >
           Close
